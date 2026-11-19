@@ -1,0 +1,16 @@
+- Group purpose (adapt from https://code.chuanqisun.com/tmg-urop/) + https://code.chuanqisun.com/tmg-urop/official-proposal-writeup-guide-IAP.html
+- Show people (adapt from https://code.chuanqisun.com/tmg-30/)
+  - Individual profile opens by link
+    - Sun Chuanqi, Lead Researcher
+    - Avril
+    - Shuji
+    - Connie
+    - Fyona
+    - Sophia
+- Projects (https://code.chuanqisun.com/tmg-urop/projects.html)
+- Prototypes
+  - Link + Thumbnail
+    - Papershop
+    - Puck+
+    - Now Then Now
+- Join us (https://code.chuanqisun.com/tmg-urop/)
