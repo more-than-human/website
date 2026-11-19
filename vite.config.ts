@@ -6,7 +6,7 @@ import { defineConfig, type Plugin } from "vite";
  * Deploy base path. "/" for a custom domain or user site, "/<repo>/" for a GitHub Pages project site.
  * Set via BASE_PATH env var (the GitHub Actions workflow passes it from actions/configure-pages).
  */
-const base = normalizeBase(process.env.BASE_PATH ?? "/");
+const base = normalizeBase(process.env.BASE_PATH ?? "/website/");
 
 function normalizeBase(path: string): string {
   return `/${path.replace(/^\/+|\/+$/g, "")}/`.replace(/\/+/g, "/");
