@@ -1,3 +1,4 @@
+- Group name: Tangible AI Group
 - Group purpose (adapt from https://code.chuanqisun.com/tmg-urop/) + https://code.chuanqisun.com/tmg-urop/official-proposal-writeup-guide-IAP.html
 - Show people (adapt from https://code.chuanqisun.com/tmg-30/)
   - Individual profile opens by link
@@ -13,4 +14,4 @@
     - Papershop
     - Puck+
     - Now Then Now
-- Join us (https://code.chuanqisun.com/tmg-urop/)
+- Join us, just link to (https://code.chuanqisun.com/tmg-urop/)
