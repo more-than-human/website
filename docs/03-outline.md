@@ -182,7 +182,7 @@ tmg-30 base: `https://code.chuanqisun.com/tmg-30/assets/people/`. Photos are sou
 ## 6. Join us (#join)
 
 **H2: Join us**
-- *We're recruiting UROPs for 26 Fall · 27 IAP · 27 Spring.*
+- *We're recruiting UROPs for 27 IAP · 27 Spring.*
 - *Bring something you can contribute and an appetite for learning the rest. At least 8 dedicated hours a week.*
 - CTA (primary accent, largest button on page): `[ READ THE UROP OPENING → ]` → https://code.chuanqisun.com/tmg-urop/
 
