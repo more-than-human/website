@@ -12,10 +12,14 @@
     - Connie
     - Fyona
     - Sophia
-- Projects (https://code.chuanqisun.com/tmg-urop/projects.html)
+- Projects (https://code.chuanqisun.com/tmg-urop/projects.html) (just for design reference, don't display this)
 - Prototypes
   - Link + Thumbnail
     - Papershop
     - Puck+
     - Now Then Now
 - Join us, just link to (https://code.chuanqisun.com/tmg-urop/)
+- Puck assets (crawl) designed by Avril
+  - interactive: https://code.chuanqisun.com/tangible-grammar/v2-interactive.html
+  - animated: https://code.chuanqisun.com/tangible-grammar/v2-animation.html
+- [Magnetic puck viz](./assets/pucks), designed by Shuji

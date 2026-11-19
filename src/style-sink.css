@@ -1,0 +1,42 @@
+/* Layout for the style sink page only. Components come from style.css. */
+.sink {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--s6) var(--gutter);
+}
+.sink-head h1 {
+  font-size: var(--fs-xl);
+  margin: var(--s2) 0;
+}
+.sink-section {
+  border-top: 1px solid var(--fg);
+  padding: var(--s5) 0;
+}
+.sink-title {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--mute);
+  margin: 0 0 var(--s4);
+}
+.sink-rules li {
+  margin-bottom: var(--s2);
+}
+.sink-swatches {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--s2);
+}
+.sink-swatches li {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.sink-swatches span {
+  width: 3rem;
+  height: 1.5rem;
+}
+.sink-static {
+  position: static;
+}

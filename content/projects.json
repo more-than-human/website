@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "hold-that-thought",
+    "label": "Hold That Thought"
+  },
+  {
+    "slug": "papershop",
+    "label": "Papershop",
+    "started": "2026-09",
+    "prototype": {
+      "summary": "Draw on paper, point, and speak to compose images and objects. The physical desk is the editor.",
+      "thumbnail": "/assets/papershop/sketch-01.webp",
+      "thumbnailAlt": "Storyboard: drawing a mug on paper, pointing at it, then pointing at the screen to place it",
+      "credit": "Sun Chuanqi"
+    }
+  },
+  {
+    "slug": "puck-plus-plus",
+    "label": "Puck++",
+    "started": "2026-09",
+    "prototype": {
+      "summary": "One puck per idea. Pull, push, flip, and turn its knobs to steer what the AI generates in real time.",
+      "link": "/assets/pucks/context-pucks-v2-interactive.html",
+      "thumbnail": "/assets/pucks/puck-plus-plus-thumb.webp",
+      "thumbnailAlt": "A puck with five knobs, each labeled with a concept, and a checklist of steering gestures",
+      "credit": "Avril Cui"
+    }
+  },
+  {
+    "slug": "now-then-now",
+    "label": "Now Then Now",
+    "prototype": {
+      "summary": "A living map of personal /now pages: all our complex lives all at once.",
+      "thumbnail": "/assets/now-then-now/map.webp",
+      "thumbnailAlt": "Map of colored dots, one per person, grouped by what fills their life right now",
+      "credit": "Connie Huang"
+    }
+  },
+  {
+    "slug": "dream-brush",
+    "label": "Dream Brush"
+  },
+  {
+    "slug": "working-group",
+    "label": "Working Group"
+  }
+]

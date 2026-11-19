@@ -1,0 +1,77 @@
+[
+  {
+    "group": "Advisor",
+    "members": [
+      {
+        "id": "hiroshi-ishii",
+        "name": "Hiroshi Ishii",
+        "role": "Faculty Advisor · Director, Tangible Media Group",
+        "photo": "/assets/people/hiroshi-ishii.webp",
+        "link": "https://tangible.media.mit.edu/person/hiroshi-ishii/"
+      }
+    ]
+  },
+  {
+    "group": "Research Leads",
+    "members": [
+      {
+        "id": "sun-chuanqi",
+        "name": "Sun Chuanqi",
+        "role": "Research Lead · M.S. Candidate",
+        "photo": "/assets/people/chuanqi-sun.webp",
+        "link": "https://tangible.media.mit.edu/person/chuanqi-sun/"
+      },
+      {
+        "id": "quincy-kuang",
+        "name": "Quincy Kuang",
+        "role": "Research Lead · Ph.D. Candidate",
+        "photo": "/assets/people/quincy-kuang.webp",
+        "link": "https://tangible.media.mit.edu/person/quincy-kuang/"
+      },
+      {
+        "id": "lucy-li",
+        "name": "Lucy Li",
+        "role": "Research Lead · Ph.D. Candidate",
+        "photo": "/assets/people/lucy-li.webp",
+        "link": "https://tangible.media.mit.edu/person/lucy-li/"
+      }
+    ]
+  },
+  {
+    "group": "UROP Researchers",
+    "members": [
+      {
+        "id": "avril-cui",
+        "name": "Avril Cui",
+        "role": "UROP · MIT EECS",
+        "photo": "/assets/people/avril-cui.webp",
+        "link": "https://acuvilr.one/"
+      },
+      {
+        "id": "shuji-hosokawa",
+        "name": "Shuji Hosokawa",
+        "role": "UROP",
+        "photo": "/assets/people/shuji-hosokawa.webp"
+      },
+      {
+        "id": "connie-huang",
+        "name": "Connie Huang",
+        "role": "UROP · MIT EECS",
+        "photo": "/assets/people/connie-huang.webp",
+        "link": "https://conniehuang.dev/"
+      },
+      {
+        "id": "fyona-shi",
+        "name": "Fyona Shi",
+        "role": "UROP",
+        "photo": "/assets/people/fyona-shi.webp"
+      },
+      {
+        "id": "sophia-loiselle",
+        "name": "Sophia Loiselle",
+        "role": "UROP · MIT EECS",
+        "photo": "/assets/people/sophia-loiselle.webp"
+      }
+    ]
+  }
+]

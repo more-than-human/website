@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Style sink · Tangible AI Working Group</title>
+  </head>
+  <body>
+    <main class="sink">
+      <header class="sink-head">
+        <p class="label">Dev only · not linked from the site</p>
+        <h1>Style sink</h1>
+        <p>
+          Every token and component from <code>src/style.css</code>, rendered with real content through the same
+          renderers as the site (<code>src/render.ts</code>). Change the stylesheet here first, then check the full page.
+        </p>
+      </header>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Principles</h2>
+        <ol class="sink-rules">
+          <li>White on black. Lines are <code>--dim</code>, secondary text is <code>--mute</code>, everything else is <code>--fg</code>.</li>
+          <li>
+            Orange (<code>--accent</code>) marks only what we most want you to do or notice: the Join call to action,
+            the cursor, and keyboard focus. Never decoration.
+          </li>
+          <li>Emphasis without color: invert to white background with black text.</li>
+          <li>One typeface, monospace. Hierarchy comes from size, weight, and uppercase labels.</li>
+          <li>Square corners, 1px rules, no shadows, no gradients.</li>
+          <li>Images are monochrome at rest. Portraits are 1-bit dithered. Color appears on hover or focus.</li>
+        </ol>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Color</h2>
+        <ul class="sink-swatches">
+          <li><span style="background: var(--bg); border: 1px solid var(--dim)"></span>--bg #000</li>
+          <li><span style="background: var(--fg)"></span>--fg #f4f4f4</li>
+          <li><span style="background: var(--mute)"></span>--mute #8c8c8c · secondary text</li>
+          <li><span style="background: var(--dim)"></span>--dim #555 · rules only, never text</li>
+          <li><span style="background: var(--accent)"></span>--accent #ff5a1f · primary action, cursor, focus</li>
+        </ul>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Type</h2>
+        <p class="hero-title">Tangible AI<span class="cursor" aria-hidden="true"></span></p>
+        <p class="join-title">New players welcome</p>
+        <p class="focus-title">Focus title</p>
+        <p class="lead">Lead: computation as human experience.</p>
+        <p>Body: we design and build interactive systems that make us more human, and more than human.</p>
+        <p class="label">Label · uppercase · tracked</p>
+        <p class="credit">Credit / meta text</p>
+        <p><a href="#">Inline link</a> · <a class="arrow-link" href="#">Arrow link →</a></p>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Section label</h2>
+        <h2 class="section-label sink-static"><span class="section-index">02</span>Updates</h2>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Buttons</h2>
+        <p class="actions">
+          <a class="button button-primary" href="#">Join us</a>
+          <a class="button" href="#">Latest updates</a>
+          <a class="button button-primary button-large" href="#">Read the UROP opening ↗</a>
+        </p>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Chips, tags, skill tags</h2>
+        <nav class="filter" aria-label="Sample filter"><ul data-sink="chips"></ul></nav>
+        <p class="tag-row" data-sink="tags"></p>
+        <ul class="tags">
+          <li>Real-time interaction</li>
+          <li>Hardware &amp; embedded</li>
+        </ul>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Manifesto, values, focus</h2>
+        <ul class="manifesto">
+          <li>Why can't we grasp an agent and steer it in real time?</li>
+          <li class="manifesto-final"><strong>We are the interaction maximalists.</strong></li>
+        </ul>
+        <dl class="values">
+          <div>
+            <dt>Ownership &gt; instruction</dt>
+            <dd>We build to think.</dd>
+          </div>
+          <div>
+            <dt>Peer learning &gt; working alone</dt>
+            <dd>Teach what you know.</dd>
+          </div>
+          <div>
+            <dt>Growth mindset &gt; ego</dt>
+            <dd>Failures are data.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Window frame</h2>
+        <figure class="window">
+          <figcaption class="window-bar"><span>puck++ / still</span><span>design: Avril Cui</span></figcaption>
+          <img class="media" src="/assets/pucks/puck-plus-plus-thumb.webp" alt="" />
+        </figure>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Updates: image, video, link only, undated</h2>
+        <ol class="update-list" data-sink="updates"></ol>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Prototype cards</h2>
+        <ul class="prototype-list" data-sink="prototypes"></ul>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Person cards: linked, unlinked, initials fallback</h2>
+        <ul class="people-list" data-sink="people"></ul>
+      </section>
+    </main>
+    <script type="module" src="/src/style-sink.ts"></script>
+  </body>
+</html>
