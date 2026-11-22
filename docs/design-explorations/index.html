@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design explorations — Tangible AI WG</title>
+<style>
+  body { margin: 0; font: 15px/1.5 ui-sans-serif, system-ui, sans-serif; background: #eee; color: #111; padding: 32px; }
+  h1 { font-weight: 600; margin: 0 0 4px; }
+  p.sub { margin: 0 0 28px; color: #666; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 28px; }
+  a.card { display: block; background: #fff; text-decoration: none; color: inherit; border: 1px solid #ccc; }
+  a.card:hover { border-color: #111; }
+  .frame { height: 300px; overflow: hidden; position: relative; border-bottom: 1px solid #ddd; }
+  .frame iframe { width: 1440px; height: 1000px; border: 0; transform: scale(.25); transform-origin: 0 0; pointer-events: none; position: absolute; }
+  @media (min-width: 0) { .frame iframe { transform: scale(calc(1 / 3.6)); } }
+  .meta { padding: 14px 16px 18px; }
+  .meta b { font-size: 17px; }
+  .meta span { display: block; color: #666; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Design explorations</h1>
+<p class="sub">Five directions for the Tangible AI Working Group site. Same content, different worlds. Click to open full page.</p>
+<div class="grid">
+  <a class="card" href="01-field-notes.html"><div class="frame"><iframe src="01-field-notes.html" loading="lazy" tabindex="-1"></iframe></div><div class="meta"><b>01 · Field Notes</b><span>Paper, ink, pencil margin notes. A researcher's notebook. Ties to Papershop and sketching-as-thinking.</span></div></a>
+  <a class="card" href="02-soft-matter.html"><div class="frame"><iframe src="02-soft-matter.html" loading="lazy" tabindex="-1"></iframe></div><div class="meta"><b>02 · Soft Matter</b><span>Clay tones, puck-shaped objects, squishy motion. The site itself feels tangible.</span></div></a>
+  <a class="card" href="03-exhibition.html"><div class="frame"><iframe src="03-exhibition.html" loading="lazy" tabindex="-1"></iframe></div><div class="meta"><b>03 · Exhibition</b><span>Gallery catalogue. Condensed type, numbered plates, asymmetric grid, one vermilion dot.</span></div></a>
+  <a class="card" href="04-night-garden.html"><div class="frame"><iframe src="04-night-garden.html" loading="lazy" tabindex="-1"></iframe></div><div class="meta"><b>04 · Night Garden</b><span>Dark and luminous. Botanical line art, breathing light, serif italics. "A breath of fresh air."</span></div></a>
+  <a class="card" href="05-riso-zine.html"><div class="frame"><iframe src="05-riso-zine.html" loading="lazy" tabindex="-1"></iframe></div><div class="meta"><b>05 · Riso Zine</b><span>Two-ink overprint, halftone photos, stickers and cut-outs. Playful, DIY, very Media Lab.</span></div></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>02 · Soft Matter — Tangible AI Working Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --clay: #e8dfd2;
+    --clay-deep: #d9ccb9;
+    --cream: #f6f1e9;
+    --soil: #2b2420;
+    --terra: #c8643b;
+    --moss: #6e7a4f;
+    --sky: #a9b8c4;
+    --font: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--clay); color: var(--soil); font-family: var(--font); font-size: 18px; line-height: 1.5; }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; }
+  .logo i { width: 22px; height: 22px; border-radius: 50%; background: var(--soil); box-shadow: inset -4px -4px 0 rgba(255,255,255,.15); }
+  nav { display: flex; gap: 6px; background: var(--cream); padding: 6px; border-radius: 999px; }
+  nav a { text-decoration: none; padding: 8px 16px; border-radius: 999px; font-size: 15px; }
+  nav a:hover { background: var(--clay-deep); }
+  nav a.join { background: var(--terra); color: var(--cream); }
+
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; min-height: 82vh; }
+  .hero h1 { font-size: clamp(56px, 8.4vw, 132px); line-height: .9; font-weight: 800; letter-spacing: -.045em; margin: 0; font-variation-settings: "opsz" 96; }
+  .hero h1 span { color: var(--terra); }
+  .hero p { font-size: 24px; max-width: 26ch; margin: 28px 0 0; font-weight: 350; line-height: 1.3; }
+  .hero small { display: block; margin-bottom: 20px; font-size: 14px; letter-spacing: .04em; opacity: .7; }
+
+  /* the puck cluster */
+  .pucks { position: relative; aspect-ratio: 1; }
+  .puck { position: absolute; border-radius: 50%; display: grid; place-items: center; text-align: center; font-weight: 600; font-size: 15px; line-height: 1.15;
+    box-shadow: inset -10px -14px 24px rgba(0,0,0,.14), inset 10px 12px 22px rgba(255,255,255,.55), 0 24px 40px -18px rgba(60,40,20,.45); transition: transform .5s cubic-bezier(.3,1.6,.5,1); }
+  .puck:hover { transform: translateY(-8px) rotate(-8deg); }
+  .p1 { width: 52%; height: 52%; left: 20%; top: 22%; background: var(--cream); font-size: 22px; }
+  .p2 { width: 26%; height: 26%; left: 0; top: 6%; background: var(--terra); color: var(--cream); }
+  .p3 { width: 22%; height: 22%; right: 4%; top: 4%; background: var(--moss); color: var(--cream); }
+  .p4 { width: 30%; height: 30%; right: 0; bottom: 6%; background: var(--sky); }
+  .p5 { width: 17%; height: 17%; left: 6%; bottom: 10%; background: var(--soil); color: var(--cream); font-size: 13px; }
+  .knob { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--soil); }
+
+  section { padding: 100px 0; }
+  .eyebrow { display: inline-block; font-size: 14px; font-weight: 600; background: var(--cream); padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
+  h2 { font-size: clamp(40px, 5.6vw, 80px); line-height: .95; letter-spacing: -.035em; font-weight: 750; margin: 0 0 32px; max-width: 16ch; }
+
+  .vision { background: var(--soil); color: var(--cream); border-radius: 56px; padding: 88px 64px; margin: 0 -28px; }
+  .vision .eyebrow { background: var(--terra); }
+  .manifesto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 48px; }
+  .manifesto div { background: rgba(255,255,255,.06); border-radius: 28px; padding: 28px; font-size: 21px; font-weight: 350; }
+  .manifesto div:last-child { grid-column: 1 / -1; background: var(--cream); color: var(--soil); font-size: clamp(28px, 4vw, 52px); font-weight: 800; letter-spacing: -.03em; text-align: center; border-radius: 999px; }
+  .focus { margin-top: 56px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: center; }
+  .focus .ring { aspect-ratio: 1; border-radius: 50%; border: 14px solid var(--terra); display: grid; place-items: center; font-weight: 700; text-align: center; font-size: 20px; line-height: 1.05; }
+  .focus h3 { font-size: 36px; margin: 0 0 8px; letter-spacing: -.02em; }
+
+  .projects { display: grid; grid-template-columns: repeat(12, 1fr); gap: 22px; }
+  .card { background: var(--cream); border-radius: 36px; padding: 16px 16px 28px; transition: transform .4s cubic-bezier(.3,1.6,.5,1); }
+  .card:hover { transform: rotate(-1.2deg) translateY(-6px); }
+  .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 24px; display: block; filter: saturate(.25) sepia(.25); transition: filter .4s; }
+  .card:hover img { filter: none; }
+  .card h3 { font-size: 30px; letter-spacing: -.02em; margin: 20px 12px 4px; }
+  .card p { margin: 0 12px; font-weight: 350; }
+  .c1 { grid-column: span 7; } .c2 { grid-column: span 5; } .c3 { grid-column: span 5; } .c4 { grid-column: span 7; }
+  .c2 { background: var(--moss); color: var(--cream); } .c3 { background: var(--sky); }
+
+  .people { display: flex; flex-wrap: wrap; gap: 28px 20px; }
+  .person { width: 168px; text-align: center; }
+  .person img { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; filter: grayscale(1); border: 8px solid var(--cream); transition: filter .3s, transform .4s cubic-bezier(.3,1.6,.5,1); }
+  .person:hover img { filter: none; transform: scale(1.05) rotate(4deg); }
+  .person b { display: block; margin-top: 10px; font-weight: 650; }
+  .person span { font-size: 14px; opacity: .7; }
+  .person.lead img { border-color: var(--terra); }
+
+  .join-sec { text-align: center; background: var(--terra); color: var(--cream); border-radius: 50% 50% 56px 56px / 120px 120px 56px 56px; padding: 140px 28px 110px; margin: 40px -28px 0; }
+  .join-sec h2 { margin: 0 auto 20px; }
+  .join-sec p { max-width: 40ch; margin: 0 auto; font-size: 20px; }
+  .join-sec a { display: inline-block; margin-top: 36px; background: var(--cream); color: var(--soil); text-decoration: none; font-weight: 700; font-size: 22px; padding: 22px 40px; border-radius: 999px; box-shadow: 0 10px 0 var(--soil); transition: transform .15s, box-shadow .15s; }
+  .join-sec a:active { transform: translateY(8px); box-shadow: 0 2px 0 var(--soil); }
+  footer { padding: 28px 0 40px; font-size: 14px; opacity: .7; text-align: center; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 40px 0; }
+    .manifesto { grid-template-columns: 1fr; }
+    .manifesto div:last-child { border-radius: 28px; }
+    .vision { padding: 56px 24px; border-radius: 36px; margin: 0; }
+    .focus { grid-template-columns: 1fr; }
+    .focus .ring { width: 180px; }
+    .projects > * { grid-column: 1 / -1 !important; }
+    nav a:not(.join) { display: none; }
+    .person { width: calc(50% - 10px); }
+    .person img { width: 120px; height: 120px; }
+    .join-sec { margin: 40px 0 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><i></i>Tangible AI Working Group</div>
+    <nav><a href="#vision">Vision</a><a href="#projects">Projects</a><a href="#members">Members</a><a class="join" href="#join">Join us</a></nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <small>MIT MEDIA LAB · <a href="https://tangible.media.mit.edu/">TANGIBLE MEDIA GROUP</a></small>
+      <h1>Ideas you can <span>hold.</span></h1>
+      <p>Interacting with AI should feel like a breath of fresh air.</p>
+    </div>
+    <div class="pucks" aria-hidden="true">
+      <div class="puck p1">more<br />poetic<span class="knob" style="top:12%;left:48%"></span></div>
+      <div class="puck p2">deeper</div>
+      <div class="puck p3">mix</div>
+      <div class="puck p4">drop<br />this</div>
+      <div class="puck p5">flip</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="vision" class="vision">
+    <span class="eyebrow">Vision</span>
+    <h2>Computation as human experience.</h2>
+    <p style="max-width:56ch;font-size:20px;font-weight:350;opacity:.85">For over 30 years, the Tangible Media Group, led by Professor Hiroshi Ishii, has bridged the digital and physical worlds. The Working Group carries that work into the age of AI.</p>
+    <div class="manifesto">
+      <div>We are tired of screens, chat bots, and endless prompting.</div>
+      <div>Why can't we grasp an agent and steer it in real time?</div>
+      <div>100× the speed and bandwidth of human–machine interaction — without brain–computer interfaces.</div>
+      <div>Think more, intend more, act more, aspire more.</div>
+      <div>We are the interaction maximalists.</div>
+    </div>
+    <div class="focus">
+      <div class="ring">Hold<br />That<br />Thought</div>
+      <div>
+        <h3>Handles for ideas.</h3>
+        <p style="font-weight:350;opacity:.85">Simple controls bound to the meaning of what a model generates — a slider bound to “more poetic,” one puck per idea in a brainstorm. On screen or physical, the output changes as you move them. No submit button.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <span class="eyebrow">Projects</span>
+    <h2>Things we're shaping.</h2>
+    <div class="projects">
+      <article class="card c1"><img src="../../public/assets/papershop/sketch-01.webp" alt="Storyboard of drawing a mug on paper and placing it on screen" /><h3>Papershop</h3><p>Draw on paper, point, and speak. The physical desk is the editor.</p></article>
+      <article class="card c2"><img src="../../public/assets/pucks/puck-plus-plus-thumb.webp" alt="A puck with five labeled knobs" /><h3>Puck++</h3><p>One puck per idea. Pull, push, flip, and turn.</p></article>
+      <article class="card c3"><img src="../../public/assets/now-then-now/map.webp" alt="Map of colored dots, one per person" /><h3>Now Then Now</h3><p>All our complex lives all at once.</p></article>
+      <article class="card c4"><img src="../../public/assets/spaceship-ide.webp" alt="Story generated line by line with a tension dial" /><h3>Spaceship IDE</h3><p>What if language models ran at 60 frames per second?</p></article>
+    </div>
+  </section>
+
+  <section id="members">
+    <span class="eyebrow">Members</span>
+    <h2>Hands on the knobs.</h2>
+    <div class="people">
+      <div class="person lead"><img src="../../public/assets/people/hiroshi-ishii.webp" alt="" /><b>Hiroshi Ishii</b><span>Faculty Advisor</span></div>
+      <div class="person lead"><img src="../../public/assets/people/chuanqi-sun.webp" alt="" /><b>Sun Chuanqi</b><span>Research Lead</span></div>
+      <div class="person lead"><img src="../../public/assets/people/quincy-kuang.webp" alt="" /><b>Quincy Kuang</b><span>Research Lead</span></div>
+      <div class="person lead"><img src="../../public/assets/people/lucy-li.webp" alt="" /><b>Lucy Li</b><span>Research Lead</span></div>
+      <div class="person"><img src="../../public/assets/people/avril-cui.webp" alt="" /><b>Avril Cui</b><span>UROP</span></div>
+      <div class="person"><img src="../../public/assets/people/shuji-hosokawa.webp" alt="" /><b>Shuji Hosokawa</b><span>UROP</span></div>
+      <div class="person"><img src="../../public/assets/people/connie-huang.webp" alt="" /><b>Connie Huang</b><span>UROP</span></div>
+      <div class="person"><img src="../../public/assets/people/fyona-shi.webp" alt="" /><b>Fyona Shi</b><span>UROP</span></div>
+      <div class="person"><img src="../../public/assets/people/sophia-loiselle.webp" alt="" /><b>Sophia Loiselle</b><span>UROP</span></div>
+    </div>
+  </section>
+</div>
+
+<section id="join" class="join-sec">
+  <h2>New players welcome.</h2>
+  <p>Recruiting UROPs for IAP and Spring 2027. Bring something you can contribute and an appetite for learning the rest.</p>
+  <a href="https://code.chuanqisun.com/tmg-urop/">Read the UROP opening →</a>
+</section>
+<footer>Tangible AI Working Group · MIT Media Lab</footer>
+</body>
+</html>

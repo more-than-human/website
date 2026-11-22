@@ -1,5 +1,5 @@
 import { homeHref, personHref } from "./base.ts";
-import { creditsFor, projectBySlug, type Person, type Project, type Update } from "./content.ts";
+import { creditsFor, projectBySlug, type Person, type Project, type ShowcaseItem, type Update } from "./content.ts";
 import { escapeHtml as esc, externalAttrs } from "./markdown.ts";
 
 /** Shared HTML renderers, used by the site (main.ts) and the style sink (style-sink.ts). */
@@ -77,19 +77,18 @@ function initials(name: string): string {
     .slice(0, 3);
 }
 
-/** Dithered portraits live next to the photo: …/people/x.webp → …/people/dither/x.png and x-ansi.png */
-function ditherPaths(photo: string): { mono: string; ansi: string } {
-  const stem = photo.replace(/\/([^/]+)\.\w+$/, "/dither/$1");
-  return { mono: `${stem}.png`, ansi: `${stem}-ansi.png` };
+/** Comic portraits live next to the photo: …/people/x.webp → …/people/comic/x.webp (see scripts/comic.py). */
+function comicPath(photo: string): string {
+  return photo.replace(/\/([^/]+)\.\w+$/, "/comic/$1.webp");
 }
 
+/** Comic drawing at rest; the real photo fades in on hover or focus. */
 function portrait(m: Person, eager = false): string {
-  if (!m.photo) return `<span class="portrait portrait-initials" aria-hidden="true">${esc(initials(m.name))}</span>`;
-  const { mono, ansi } = ditherPaths(m.photo);
+  if (!m.photo) return `<span class="portrait portrait-initials" aria-hidden="true"><span>${esc(initials(m.name))}</span></span>`;
   const loading = eager ? "" : ' loading="lazy"';
   return `<span class="portrait">
-    <img class="portrait-mono" src="${esc(mono)}" alt=""${loading} />
-    <img class="portrait-ansi" src="${esc(ansi)}" alt=""${loading} />
+    <img class="portrait-comic" src="${esc(comicPath(m.photo))}" alt=""${loading} />
+    <img class="portrait-photo" src="${esc(m.photo)}" alt=""${loading} />
   </span>`;
 }
 
@@ -127,7 +126,7 @@ export function renderProfile(m: Person): string {
       <div class="profile-portrait">${portrait(m, true)}</div>
       <div class="profile-info">
         <p class="label">${esc(m.group ?? "People")}</p>
-        <h1 id="profile-name" class="profile-name">${esc(m.name)}<span class="cursor" aria-hidden="true"></span></h1>
+        <h1 id="profile-name" class="profile-name">${esc(m.name)}</h1>
         <p class="profile-role">${esc(m.role)}</p>
         <dl class="profile-facts">
           <div><dt>Working group</dt><dd>Tangible AI Working Group</dd></div>
@@ -148,7 +147,60 @@ export function renderNotFound(id: string): string {
   return `<article class="profile">
     <p class="profile-back"><a class="arrow-link" href="${homeHref("people")}" data-route>← All people</a></p>
     <p class="label">404</p>
-    <h1 class="profile-name">No one here<span class="cursor" aria-hidden="true"></span></h1>
+    <h1 class="profile-name">No one here</h1>
     <p>We couldn't find a profile called <code>${esc(id)}</code>.</p>
   </article>`;
+}
+
+/* ---------------------------------------------------------------- showcase ("Now showing") */
+
+function showcaseMedia(s: ShowcaseItem): string {
+  const poster = `<img class="showcase-poster" src="${esc(s.poster)}" alt="${esc(s.posterAlt)}" />`;
+  if (s.kind === "video") {
+    return `<video class="showcase-video" src="${esc(s.src)}" poster="${esc(s.poster)}" muted loop playsinline preload="none" aria-label="${esc(s.posterAlt)}"></video>`;
+  }
+  if (s.kind === "embed") {
+    // The iframe gets its src only while the panel is active (see showcase.ts). Phones get the still instead.
+    return `<iframe class="showcase-frame" data-src="${esc(s.src)}" title="${esc(`${s.title}: ${s.subtitle}`)}" tabindex="-1"></iframe>
+      <a class="showcase-still" href="${esc(s.links?.[0]?.href ?? s.src)}"${externalAttrs(s.links?.[0]?.href ?? s.src)}>${poster}</a>`;
+  }
+  return `${poster}
+    <button class="showcase-launch" type="button" data-launch="${esc(s.src)}" data-title="${esc(s.title)}">
+      <span class="showcase-launch-icon" aria-hidden="true">▶</span>${esc(s.launchLabel ?? "Launch")}
+    </button>`;
+}
+
+function shortDate(date: string): string {
+  const [y, m] = date.split("-");
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return m ? `${months[Number(m) - 1]} ${y}` : y;
+}
+
+export function renderShowcase(items: ShowcaseItem[], active = 0): string {
+  const panels = items
+    .map((s, i) => {
+      const links = (s.links ?? []).map((l) => `<a href="${esc(l.href)}"${externalAttrs(l.href)}>${esc(l.label)} ↗</a>`).join(" · ");
+      return `<figure class="showcase-panel" id="show-${esc(s.id)}" role="tabpanel" aria-labelledby="show-tab-${esc(s.id)}" data-kind="${s.kind}"${i === active ? "" : " hidden"}>
+        <div class="window-screen">${showcaseMedia(s)}</div>
+        <figcaption class="window-bar">
+          <span><strong>Now showing${i === 0 ? " · newest" : ""}</strong> · ${esc(s.title)} / ${esc(s.subtitle)}, ${esc(shortDate(s.date))}</span>
+          <span>By ${esc(s.credit)}${links ? ` · ${links}` : ""}</span>
+        </figcaption>
+      </figure>`;
+    })
+    .join("");
+  const tabs = items
+    .map(
+      (s, i) => `<button class="showcase-tab" type="button" role="tab" id="show-tab-${esc(s.id)}" aria-controls="show-${esc(s.id)}" aria-selected="${i === active}"${i === active ? "" : ' tabindex="-1"'}>
+        <span class="showcase-num">${String(i + 1).padStart(2, "0")}</span>
+        <span class="showcase-name">${esc(s.title)}</span>
+        <span class="showcase-date">${esc(shortDate(s.date))}</span>
+        <span class="showcase-progress" aria-hidden="true"></span>
+      </button>`,
+    )
+    .join("");
+  return `<div class="showcase" data-showcase>
+    ${panels}
+    <div class="showcase-tabs" role="tablist" aria-label="Demos">${tabs}</div>
+  </div>`;
 }

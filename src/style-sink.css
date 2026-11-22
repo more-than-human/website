@@ -5,18 +5,22 @@
   padding: var(--s6) var(--gutter);
 }
 .sink-head h1 {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-xxl);
+  font-weight: 900;
+  font-stretch: var(--cond);
+  text-transform: uppercase;
+  line-height: 0.9;
   margin: var(--s2) 0;
 }
 .sink-section {
-  border-top: 1px solid var(--fg);
+  border-top: 1px solid var(--ink);
   padding: var(--s5) 0;
 }
 .sink-title {
   font-size: var(--fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--mute);
+  color: var(--grey);
   margin: 0 0 var(--s4);
 }
 .sink-rules li {
@@ -37,6 +41,17 @@
   width: 3rem;
   height: 1.5rem;
 }
+.sink-rules {
+  max-width: 44rem;
+}
 .sink-static {
   position: static;
+}
+.sink-narrow {
+  max-width: 22rem;
+  margin-top: var(--s5);
+}
+/* Simulated hover for the person-card specimen. */
+.sink-hover .portrait-photo {
+  opacity: 1;
 }

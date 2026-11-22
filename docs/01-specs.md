@@ -7,10 +7,12 @@ Content
 
 Design
 
-- White on Black. High contrast.
-- Minimalist aesthetics. Brutalist design.
-- Judicious use of color, only for the most important elements to guide user's attention.
-- The overall vibe is programming, retro gaming vibe.
+- Exhibition theme: ink on an off-white gallery wall. High contrast.
+- Artistic and minimal, like a gallery catalogue. Not industrial.
+- Judicious use of color (vermilion), only for the most important elements to guide user's attention.
+- Keep a live demo window of our latest work on the front page.
+- Member portraits: colorful comic drawing by default, real photo on hover.
+- Scroll effects and animation that make the site feel alive (respecting reduced motion).
 
 Process
 

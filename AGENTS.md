@@ -4,12 +4,13 @@ Guidance for coding agents working on the Tangible AI Working Group website. The
 
 ## Project map
 
-- `content/` — site content. `people.json`, `projects.json`, and `updates/*.md` (front matter + Markdown body).
+- `content/` — site content. `people.json`, `projects.json`, `showcase.json` (front-page demos, newest first), and `updates/*.md` (front matter + Markdown body).
 - `src/` — TypeScript renderers (`render.ts`, `content.ts`, `markdown.ts`) and the stylesheet `style.css`.
 - `style-sink.html` + `src/style-sink.*` — dev-only page that shows every token and component. Not linked from the site.
 - `public/assets/<topic>/` — images and video served at `/assets/...`.
 - `docs/` — specs, references, outline. `docs/assets-src/` holds source art that is not shipped.
-- `scripts/dither.py` — generates dithered portraits from `public/assets/people/*.webp`.
+- `scripts/comic.py` — generates comic portraits (`public/assets/people/comic/*.webp`) from `public/assets/people/*.webp`. Run `uv run scripts/comic.py` after adding or replacing a photo.
+- `docs/design-explorations/` — the five static theme sketches the "Exhibition" direction was chosen from. Reference only; not shipped.
 
 Commands: `npm run dev`, `npm run build` (runs `tsc` first; must pass before committing). Pushing to `master` deploys to GitHub Pages.
 
@@ -24,11 +25,17 @@ Sections, in order: Research vision, Projects, Members, Join us.
 
 ## Design
 
-- White on black, high contrast.
-- Minimalist, brutalist: one monospace typeface, square corners, 1px rules, no shadows, no gradients.
-- Color is rare. The accent (`--accent`) marks only the most important thing on screen: the primary call to action, the cursor, keyboard focus. Never decoration. For emphasis without color, invert (white background, black text).
-- Vibe: programming and retro gaming. Terminal cues, pixel/dithered imagery, keyboard-friendly.
-- Images are monochrome at rest; color may appear on hover or focus.
+Theme: **Exhibition**. The site reads like a gallery catalogue for an MIT Media Lab group: artistic, quiet, confident. Not industrial, not "AI template".
+
+- A gallery wall: ink (`--ink`) on off-white (`--wall`), high contrast. Hairlines are `--line`; secondary text is `--grey`.
+- Two typefaces. Archivo for titles, labels and interface (display titles are condensed via `--cond`, uppercase, heavy). Libre Caslon Text for reading text and leads.
+- A 12-column grid. Each section has a sticky label on the left (roman numeral + name) and content on the right. Generous space, asymmetric placement, catalogue numbering ("Plate 01").
+- Square corners, 1px rules, no shadows, no gradients.
+- Color is rare. Vermilion (`--accent`) marks only the most important thing: the Join call to action, the brand dot, keyboard focus. Never decoration. For emphasis without color, invert (ink background, wall text) or go big and condensed.
+- The front page has a "Now showing" window: a playlist of demos from `content/showcase.json`, newest first, on a black "screen" with a museum-style label. Live demos show a poster and load only when the visitor clicks Launch.
+- Images are monochrome at rest; color appears on hover, focus, or while centered on screen. Portraits are the exception: colorful pop-art comics at rest, the real photo on hover/focus.
+- Motion should feel like a handle, not decoration: the hero title steers under the pointer, blocks reveal once on scroll, the ticker follows scroll direction. Motion lives in `src/motion.ts` and everything must work and be visible with JS off or `prefers-reduced-motion`.
+- Keyboard-friendly: number keys 1–5 jump to sections; visible focus everywhere.
 - Use only the existing CSS custom properties. Add a new token only if nothing fits, and add it to the style sink in the same change.
 
 ## Workflow
@@ -62,7 +69,7 @@ All shipped media goes in `public/assets/<topic>/`. Keep originals out of `publi
 
 ### Images: compressed WebP
 
-- Ship images as `.webp` only. No JPEG, PNG, or GIF in `public/` (exception: the generated `people/dither/*.png` files, which need lossless pixels).
+- Ship images as `.webp` only. No JPEG, PNG, or GIF in `public/` (generated comic portraits are lossless `.webp`).
 - Resize to the largest size actually displayed (usually ≤ 1600px on the long edge; thumbnails and portraits ≤ 800px).
 - Target quality ~75–80. Aim for under 300 KB per image; thumbnails and portraits under 100 KB.
 

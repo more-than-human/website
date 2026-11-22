@@ -7,7 +7,7 @@
       href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🌿&lt;/text&gt;&lt;/svg&gt;"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#f7f6f2" />
     <title>Tangible AI Working Group · MIT Media Lab</title>
     <meta
       name="description"
@@ -16,106 +16,104 @@
     <meta property="og:title" content="Tangible AI Working Group · MIT Media Lab" />
     <meta property="og:description" content="We design and build interactive systems that make us more human, and more than human." />
     <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Libre+Caslon+Text:ital@0;1&display=swap"
+    />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
-      <a class="site-mark" href="%BASE_URL%"><span class="site-mark-glyph" aria-hidden="true">■</span><span class="site-mark-text"> Tangible AI WG</span></a>
+      <a class="site-mark" href="%BASE_URL%">Tangible AI Working Group</a>
       <nav class="site-nav" aria-label="Sections">
         <ul>
-          <li>
-            <a href="%BASE_URL%#vision"><kbd>1</kbd>Vision</a>
-          </li>
-          <li>
-            <a href="%BASE_URL%#updates"><kbd>2</kbd>Updates</a>
-          </li>
-          <li>
-            <a href="%BASE_URL%#prototypes"><kbd>3</kbd>Prototypes</a>
-          </li>
-          <li>
-            <a href="%BASE_URL%#people"><kbd>4</kbd>People</a>
-          </li>
-          <li>
-            <a href="%BASE_URL%#join" class="nav-join"><kbd>5</kbd>Join</a>
-          </li>
+          <li><a href="%BASE_URL%#vision"><kbd>1</kbd>Vision</a></li>
+          <li><a href="%BASE_URL%#updates"><kbd>2</kbd>Updates</a></li>
+          <li><a href="%BASE_URL%#prototypes"><kbd>3</kbd>Prototypes</a></li>
+          <li><a href="%BASE_URL%#people"><kbd>4</kbd>People</a></li>
+          <li><a href="%BASE_URL%#join" class="nav-join"><kbd>5</kbd>Join</a></li>
         </ul>
       </nav>
+      <span class="scroll-progress" aria-hidden="true"></span>
     </header>
 
     <main id="main">
       <div id="home">
         <section id="top" class="hero" aria-labelledby="hero-title">
-          <p class="label">
-            MIT Media Lab /
-            <a href="https://tangible.media.mit.edu/" target="_blank" rel="noopener">Tangible Media Group</a>
-          </p>
-          <h1 id="hero-title" class="hero-title">Tangible AI<br />Working Group<span class="cursor" aria-hidden="true"></span></h1>
-          <p class="hero-tagline">Interacting with AI should feel like a breath of fresh air.</p>
-          <p class="hero-sub">We design and build interactive systems that make us more human, and more than human.</p>
-          <dl class="hero-meta">
-            <div>
-              <dt>Advisor</dt>
-              <dd>Prof. Hiroshi Ishii</dd>
-            </div>
-            <div>
-              <dt>Research leads</dt>
-              <dd>Sun Chuanqi, Quincy Kuang, Lucy Li</dd>
-            </div>
-          </dl>
-          <p class="actions">
-            <a class="button button-primary" href="#join">Join us</a>
-            <a class="button" href="#updates">Latest updates</a>
-          </p>
-          <figure class="hero-visual window">
-            <figcaption class="window-bar"><span>puck++ / steering with knobs</span><span>design: Avril Cui</span></figcaption>
-            <iframe
-              src="%BASE_URL%assets/pucks/context-pucks-v2-animation.html"
-              title="Animation: steering an idea with Puck++ knobs"
-              loading="lazy"
-              tabindex="-1"
-            ></iframe>
-            <a class="hero-still" href="%BASE_URL%assets/pucks/context-pucks-v2-interactive.html" target="_blank" rel="noopener">
-              <img
-                src="%BASE_URL%assets/pucks/puck-plus-plus-thumb.webp"
-                alt="Puck++: a puck with five knobs, each labeled with a concept. Opens the interactive demo."
-                loading="lazy"
-              />
-            </a>
-          </figure>
+          <h1 id="hero-title" class="hero-title" data-steer>Tangible AI</h1>
+          <p class="hero-hint" aria-hidden="true"><span>Working Group · MIT Media Lab</span><span class="hero-hint-steer">← This title is a handle. Move across it →</span></p>
+
+          <div class="hero-text">
+            <p class="hero-tagline">Interacting with AI should feel like a breath of fresh <span class="nowrap">air<span class="dot" aria-hidden="true"></span></span></p>
+            <p class="hero-sub">We design and build interactive systems that make us more human, and more than human.</p>
+            <p class="actions">
+              <a class="button button-primary" href="#join">Join us</a>
+              <a class="button" href="#updates">Latest updates</a>
+            </p>
+            <dl class="hero-meta">
+              <div>
+                <dt>Part of</dt>
+                <dd><a href="https://tangible.media.mit.edu/" target="_blank" rel="noopener">Tangible Media Group</a>, MIT Media Lab</dd>
+              </div>
+              <div>
+                <dt>Advisor</dt>
+                <dd>Prof. Hiroshi Ishii</dd>
+              </div>
+              <div>
+                <dt>Research leads</dt>
+                <dd>Sun Chuanqi, Quincy Kuang, Lucy Li</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="hero-visual" data-slot="showcase"></div>
         </section>
 
+        <div class="ticker" aria-hidden="true">
+          <div class="ticker-track">
+            <span>Grasp it</span><span>Steer it</span><span>Turn the knob</span><span>Point at it</span><span>No submit button</span><span>Think more</span><span>Intend more</span><span>Act more</span>
+          </div>
+        </div>
+
         <section id="vision" class="section" aria-labelledby="vision-title">
-          <h2 id="vision-title" class="section-label"><span class="section-index">01</span>Vision</h2>
+          <h2 id="vision-title" class="section-label"><span class="section-index">I</span>Vision</h2>
           <div class="section-body">
             <p class="lead">Computation as human experience.</p>
-            <p>
+            <p class="serif">
               The Tangible AI Working Group is part of the
               <a href="https://tangible.media.mit.edu/" target="_blank" rel="noopener">Tangible Media Group</a> at the MIT Media Lab. For over 30 years, TMG,
               led by Professor Hiroshi Ishii, has bridged the digital and physical worlds. The Working Group carries that work into the age of AI.
             </p>
 
+            <h3 class="label">Manifesto</h3>
             <ul class="manifesto">
               <li>We are tired of screens, chat bots, and endless prompting.</li>
               <li>Why can't we grasp an agent and steer it in real time?</li>
               <li>We are working to increase the speed and bandwidth of human–machine interaction by 100× — without brain–computer interfaces.</li>
               <li>We want to help people achieve more by thinking more, intending more, acting more, and aspiring more.</li>
-              <li class="manifesto-final"><strong>We are the interaction maximalists.</strong></li>
+              <li class="manifesto-final"><strong data-scrub>We are the interaction maximalists.</strong></li>
             </ul>
 
             <div class="focus">
-              <h3 class="label">Current focus</h3>
-              <p class="focus-title">Hold That Thought</p>
-              <p>
-                Today, people use AI by taking turns: prompt, wait, read, prompt again. You can't grab an idea and nudge it while you watch it change. We give
-                handles to ideas: simple controls bound to the
-                <em>meaning</em> of what a model generates, such as a slider bound to "more poetic" or one puck per idea in a brainstorm. Handles can be on
-                screen or physical. Either way the output changes in real time as you move them, with no submit button.
-              </p>
-              <p>Research question: do people working this way become more creative, feel more in control, and enjoy it more than with chat?</p>
-              <p>
-                <a class="arrow-link" href="%BASE_URL%?project=hold-that-thought#updates" data-project="hold-that-thought">Hold That Thought updates →</a>
-              </p>
+              <div class="focus-head">
+                <h3 class="label">Current focus</h3>
+                <p class="focus-title">Hold That Thought</p>
+              </div>
+              <div class="focus-body">
+                <p>
+                  Today, people use AI by taking turns: prompt, wait, read, prompt again. You can't grab an idea and nudge it while you watch it change. We
+                  give handles to ideas: simple controls bound to the <em>meaning</em> of what a model generates, such as a slider bound to "more poetic"
+                  or one puck per idea in a brainstorm. Handles can be on screen or physical. Either way the output changes in real time as you move them,
+                  with no submit button.
+                </p>
+                <p>Research question: do people working this way become more creative, feel more in control, and enjoy it more than with chat?</p>
+                <p>
+                  <a class="arrow-link" href="%BASE_URL%?project=hold-that-thought#updates" data-project="hold-that-thought">Hold That Thought updates →</a>
+                </p>
+              </div>
             </div>
 
             <h3 class="label">How we work</h3>
@@ -147,7 +145,7 @@
         </section>
 
         <section id="updates" class="section" aria-labelledby="updates-title">
-          <h2 id="updates-title" class="section-label"><span class="section-index">02</span>Updates</h2>
+          <h2 id="updates-title" class="section-label"><span class="section-index">II</span>Updates</h2>
           <div class="section-body">
             <p class="lead">Notes, demos, and papers from the Working Group, newest first.</p>
             <div data-slot="updates"></div>
@@ -155,7 +153,7 @@
         </section>
 
         <section id="prototypes" class="section" aria-labelledby="prototypes-title">
-          <h2 id="prototypes-title" class="section-label"><span class="section-index">03</span>Prototypes</h2>
+          <h2 id="prototypes-title" class="section-label"><span class="section-index">III</span>Prototypes</h2>
           <div class="section-body">
             <p class="lead">Things we are building.</p>
             <div data-slot="prototypes"></div>
@@ -163,7 +161,7 @@
         </section>
 
         <section id="people" class="section" aria-labelledby="people-title">
-          <h2 id="people-title" class="section-label"><span class="section-index">04</span>People</h2>
+          <h2 id="people-title" class="section-label"><span class="section-index">IV</span>People</h2>
           <div class="section-body">
             <p class="lead">A small team with complementary hardware, software, and design skills.</p>
             <div data-slot="people"></div>
@@ -171,16 +169,13 @@
         </section>
 
         <section id="join" class="section section-join" aria-labelledby="join-title">
-          <h2 id="join-title" class="section-label"><span class="section-index">05</span>Join</h2>
+          <h2 id="join-title" class="section-label"><span class="section-index">V</span>Join</h2>
           <div class="section-body">
-            <p class="join-title">New players welcome<span class="cursor" aria-hidden="true"></span></p>
-            <p class="lead">We're recruiting UROPs for 27 IAP · 27 Spring.</p>
+            <p class="lead">We're recruiting UROPs for IAP 2027 and Spring 2027.</p>
+            <a class="join-cta" href="https://code.chuanqisun.com/tmg-urop/" target="_blank" rel="noopener"
+              >New players <span class="nowrap">welcome<span class="dot" aria-hidden="true"></span></span><br /><span class="join-cta-sub">Read the UROP opening ↗</span></a
+            >
             <p>Bring something you can contribute and an appetite for learning the rest. At least 8 dedicated hours a week.</p>
-            <p class="actions">
-              <a class="button button-primary button-large" href="https://code.chuanqisun.com/tmg-urop/" target="_blank" rel="noopener"
-                >Read the UROP opening ↗</a
-              >
-            </p>
           </div>
         </section>
       </div>
@@ -190,15 +185,10 @@
     <footer class="site-footer">
       <p>
         Tangible AI Working Group · part of the
-        <a href="https://tangible.media.mit.edu/" target="_blank" rel="noopener">Tangible Media Group</a> · MIT Media Lab · © 2026
+        <a href="https://tangible.media.mit.edu/" target="_blank" rel="noopener">Tangible Media Group</a> · MIT Media Lab
       </p>
+      <p>© 2026 · Cambridge, MA</p>
     </footer>
-
-    <div class="status-line" aria-hidden="true">
-      <span class="status-mode">TAI</span>
-      <span class="status-path" data-status-path>~/</span>
-      <span class="status-hint"><kbd>1</kbd>–<kbd>5</kbd> jump</span>
-    </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
