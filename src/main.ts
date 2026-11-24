@@ -1,9 +1,8 @@
 import "./style.css";
 import { BASE } from "./base.ts";
 import { filterableProjects, people, personById, projectBySlug, projects, showcase, updateCount, updates } from "./content.ts";
-import { escapeHtml as esc } from "./markdown.ts";
 import { initMotion } from "./motion.ts";
-import { chip, renderNotFound, renderPerson, renderProfile, renderPrototype, renderShowcase, renderUpdate } from "./render.ts";
+import { chip, renderNotFound, renderPeople, renderProfile, renderPrototype, renderShowcase, renderUpdate } from "./render.ts";
 import { initShowcase } from "./showcase.ts";
 
 const SITE_TITLE = document.title;
@@ -31,12 +30,7 @@ function renderHome(): void {
     .map((p) => renderPrototype(p, filterableProjects.includes(p)))
     .join("")}</ul>`;
 
-  slot("people").innerHTML = people
-    .map(
-      (g) =>
-        `<h3 class="label people-group">${esc(g.group)}</h3><ul class="people-list">${g.members.map(renderPerson).join("")}</ul>`,
-    )
-    .join("");
+  slot("people").innerHTML = renderPeople(people);
 }
 
 function applyFilter(): void {

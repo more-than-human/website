@@ -29,14 +29,17 @@
           <li>A gallery wall. Ink (<code>--ink</code>) on off-white (<code>--wall</code>), high contrast. Hairlines are <code>--line</code>, secondary text is <code>--grey</code>.</li>
           <li>
             Vermilion (<code>--accent</code>) marks only the most important thing: the Join call to action, the brand dot,
-            and keyboard focus. Never decoration.
+            keyboard focus, and the letter in your hand. Never decoration.
           </li>
+          <li>Color and motion are functional: they point at what matters most, and only one thing in view holds the accent. Hover confirms a target (underline, ink inversion); it never moves the vermilion or swaps colors for show.</li>
           <li>Emphasis without color: invert (ink background, wall text), or go big and condensed.</li>
           <li>Two typefaces. Archivo for titles and labels (condensed, uppercase for display), Libre Caslon for reading.</li>
           <li>A 12-column grid: section labels on the left, content on the right. Generous space, asymmetric placement, numbered like a catalogue.</li>
           <li>Square corners, 1px rules, no shadows, no gradients.</li>
           <li>Images are monochrome at rest; color on hover, on focus, or while centered on screen. Portraits are the exception: colorful pop-art comics at rest, the real photo on hover.</li>
-          <li>Motion is a handle, not decoration: the title steers under the pointer, content reveals once on scroll, the ticker follows your scroll. All of it switches off with reduced motion.</li>
+          <li>Motion is a handle, not decoration: title letters steer under the pointer and can be dragged anywhere (tethered home by a puck-style dot chain), content reveals once on scroll, the manifesto screams as you scroll, the ticker follows your scroll. Ambient motion switches off with reduced motion.</li>
+          <li>Say it once. The header mark hides while the hero title is on screen.</li>
+          <li>Nobody stands alone: every row of people holds at least two.</li>
         </ol>
       </section>
 
@@ -118,8 +121,11 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Steerable title (move the pointer across it; idle wave without a pointer)</h2>
-        <p class="hero-title" data-steer>Tangible AI</p>
+        <h2 class="sink-title">Title: letters widen near the pointer and can be dragged anywhere in the box (drop near home to snap back, double-click to send home). Idle wave without a pointer.</h2>
+        <div class="hero sink-hero">
+          <p class="hero-title" data-steer>Tangible AI</p>
+          <p class="hero-hint"><span>Working Group · MIT Media Lab</span><span class="hero-hint-drag" aria-hidden="true">Grab a letter. Drag it anywhere ↗</span><button class="hero-reset" type="button" data-title-reset hidden>Put the letters back</button></p>
+        </div>
       </section>
 
       <section class="sink-section">
@@ -135,8 +141,16 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Scroll scrub (words light up as the line scrolls up the screen)</h2>
-        <ul class="manifesto"><li class="manifesto-final"><strong data-scrub>We are the interaction maximalists.</strong></li></ul>
+        <h2 class="sink-title">The scream: scroll through it. Four chunks land in turn, each bigger, heavier, more condensed; the last floods the screen in ink and stretches to fill it.</h2>
+        <div class="scream" data-scream>
+          <p class="scream-stage">
+            <span class="scream-block">
+            <span class="scream-line" style="--k: 0">We</span>
+            <span class="scream-line" style="--k: 1">are</span>
+            <span class="scream-line" style="--k: 2">interaction</span>
+            <span class="scream-line" style="--k: 3"><span class="scream-word">maximalists<span class="dot" aria-hidden="true"></span></span></span></span>
+          </p>
+        </div>
       </section>
 
       <section class="sink-section">
@@ -150,7 +164,9 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Person cards: colorful comic at rest, photo forced on (hover state), long name, initials fallback. The photo opens as a circle from the pointer.</h2>
+        <h2 class="sink-title">People grid (real content): one grid, group label on the first card of each group. A row never holds one person; resize to see 4 → 3 → 2 columns.</h2>
+        <div data-sink="people-grid"></div>
+        <h2 class="sink-title sink-gap">Person card states: colorful comic at rest, photo forced on (hover state), long name, initials fallback. The photo opens as a circle from the pointer. Five cards, so the last row takes the spare.</h2>
         <ul class="people-list" data-sink="people"></ul>
       </section>
 

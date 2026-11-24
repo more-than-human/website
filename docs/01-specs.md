@@ -13,6 +13,10 @@ Design
 - Keep a live demo window of our latest work on the front page.
 - Member portraits: colorful comic drawing by default, real photo on hover.
 - Scroll effects and animation that make the site feel alive (respecting reduced motion).
+- The hero title is drag and drop: letters can be pulled anywhere, tethered home by dot chains in the style of our context puck space.
+- The manifesto ends with a scream: "We / are / interaction / maximalists." revealed in four chunks of increasing size, ending full screen.
+- Don't duplicate information on the same screen.
+- People: never leave a single person alone in a row, at any screen size.
 
 Process
 

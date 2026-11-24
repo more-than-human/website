@@ -92,8 +92,13 @@ function portrait(m: Person, eager = false): string {
   </span>`;
 }
 
-export function renderPerson(m: Person): string {
-  return `<li class="person">
+/** One card. `groupLabel` is shown on the first card of each group (the grid mixes groups so nobody sits alone in a row). */
+export function renderPerson(m: Person, groupLabel?: string): string {
+  const group = groupLabel
+    ? `<span class="person-group">${esc(groupLabel)}</span>`
+    : `<span class="person-group" aria-hidden="true"></span>`;
+  return `<li class="person${groupLabel ? " is-group-start" : ""}">
+    ${group}
     <a class="person-card" href="${personHref(m.id)}" data-route>
       ${portrait(m)}
       <span class="person-text">
@@ -102,6 +107,13 @@ export function renderPerson(m: Person): string {
       </span>
     </a>
   </li>`;
+}
+
+/** All people in one grid, group by group. CSS keeps every row at two or more (see .people-list). */
+export function renderPeople(groups: { group: string; members: Person[] }[]): string {
+  return `<ul class="people-list">${groups
+    .flatMap((g) => g.members.map((m, i) => renderPerson(m, i === 0 ? g.group : undefined)))
+    .join("")}</ul>`;
 }
 
 function externalLabel(url: string): string {

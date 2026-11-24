@@ -55,3 +55,9 @@
 .sink-hover .portrait-photo {
   opacity: 1;
 }
+.sink-hero {
+  padding: 0;
+}
+.sink-gap {
+  margin-top: var(--s6);
+}

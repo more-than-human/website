@@ -214,13 +214,12 @@ a:hover {
   border-radius: 50%;
   background: var(--accent);
 }
+/* Hover confirms the target without moving attention: the dot stays the one vermilion thing. */
 .button-primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--ink);
-}
-.button-primary:hover::after {
   background: var(--ink);
+  color: var(--wall);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 
 /* Images are monochrome at rest; color on hover or focus. */
@@ -340,11 +339,14 @@ a:hover {
 
 /* ---------------------------------------------------------------- hero */
 .hero {
+  position: relative; /* the tether layer is drawn over it */
   padding-top: clamp(var(--s4), 6vh, var(--s6));
   row-gap: 0;
 }
 /* One line, set so the widest steering pose still fits. */
 .hero-title {
+  position: relative;
+  z-index: 3; /* dragged letters float over the rest of the hero */
   grid-column: 1 / -1;
   font-size: clamp(3.5rem, 14.6vw, 18rem);
   font-weight: 900;
@@ -354,20 +356,91 @@ a:hover {
   letter-spacing: -0.005em;
   white-space: nowrap;
 }
+/* Each letter is a slot (stays in the line) holding a glyph (the part you drag). */
 .steer-ch {
+  position: relative;
   display: inline-block;
   font-stretch: var(--cond);
+}
+.steer-glyph {
+  display: inline-block;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+}
+.steer-ch.is-held .steer-glyph {
+  cursor: grabbing;
+}
+/* The empty slot a letter leaves behind: an outline, like a cut-out on the wall. */
+.steer-ch.is-away::before {
+  content: attr(data-ch);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--grey);
+  pointer-events: none;
 }
 /* With JS the letters rest at a wider 80% (zero-sum steering keeps the line length), so the size drops to match. */
 .hero-title.is-steerable {
   font-size: clamp(3rem, 16vw, 19.5rem);
-  cursor: ew-resize;
   user-select: none;
+  -webkit-user-select: none;
 }
+
+/* Tethers: a chain of dots from a letter's home to wherever you dropped it (the context-puck knob chain). */
+.tethers {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 4;
+}
+.tether-chain {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0 11;
+}
+.tether-home {
+  fill: var(--wall);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.tether-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: var(--grey);
+  paint-order: stroke;
+  stroke: var(--wall);
+  stroke-width: 4px;
+}
+/* The letter in your hand: its chain turns vermilion and runs from home toward you. */
+.tether.is-held .tether-chain {
+  stroke: var(--accent);
+  animation: tether-run 0.6s linear infinite;
+}
+.tether.is-held .tether-home {
+  stroke: var(--accent);
+}
+.tether.is-held .tether-label {
+  fill: var(--ink);
+}
+@keyframes tether-run {
+  to {
+    stroke-dashoffset: -11;
+  }
+}
+
 .hero-hint {
   grid-column: 1 / -1;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: var(--s3);
   margin-top: var(--s3);
   padding-top: var(--s2);
@@ -377,15 +450,42 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: var(--track);
 }
-.hero-hint-steer {
+.hero-hint-drag {
+  display: none;
   color: var(--grey);
   font-weight: 400;
+}
+.js .hero-hint-drag {
+  display: inline;
+}
+.hero-reset {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  padding: 0;
+  cursor: pointer;
+}
+.hero-reset:hover {
+  border-bottom-width: 2px;
+}
+.hero-reset:not([hidden]) ~ .hero-hint-drag,
+.hero-hint-drag:has(~ .hero-reset:not([hidden])) {
   display: none;
 }
-@media (hover: hover) and (pointer: fine) {
-  .motion .hero-hint-steer {
-    display: inline;
-  }
+
+/* The header mark repeats the hero title, so it waits off stage until the title scrolls away. */
+.site-mark {
+  transition:
+    opacity 0.4s,
+    visibility 0.4s;
+}
+.title-in-view .site-mark {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .hero-text {
@@ -393,6 +493,10 @@ a:hover {
   margin-top: var(--s5);
   display: flex;
   flex-direction: column;
+}
+/* Not an action, so not vermilion: the hero's one accent belongs to "Join us". */
+.hero-tagline .dot {
+  background: var(--ink);
 }
 .hero-tagline {
   font-family: var(--serif);
@@ -691,25 +795,118 @@ a:hover {
   color: var(--grey);
   padding-top: 0.45em;
 }
-.manifesto-final {
-  border-top-color: var(--ink) !important;
-  margin-top: var(--s4);
-  padding-top: var(--s4) !important;
+/* The scream: the manifesto's last line in four chunks that ramp up in size, weight, and width as you scroll,
+   ending on a full-bleed ink screen. Without JS (or with reduced motion) it is the final frame, at rest. */
+.scream {
+  position: relative;
+  z-index: 2; /* over the sticky section label */
+  margin-top: var(--s6);
+  margin-left: calc(-1 * var(--bleed-left, 0px));
+  width: var(--bleed-w, auto);
 }
-.manifesto li.manifesto-final {
-  display: block;
-}
-.manifesto-final::before {
-  display: none;
-}
-.manifesto-final strong {
-  display: block;
+.scream-stage {
+  --S: 15vw; /* final-line size; JS fits it to the width */
+  position: relative;
+  display: flex;
+  min-height: 60vh;
+  margin: 0;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--wall);
   font-family: var(--sans);
-  font-size: var(--fs-xxl);
-  font-weight: 900;
-  font-stretch: var(--cond);
   text-transform: uppercase;
-  line-height: 0.86;
+  line-height: 0.82;
+  transition:
+    background 0.5s cubic-bezier(0.7, 0, 0.2, 1),
+    color 0.5s;
+}
+.scream-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--s5) var(--gutter) var(--s4);
+}
+/* On a tall screen one long word can't fill it, so the poster turns sideways and reads bottom to top. */
+.scream-stage.is-rotated .scream-block {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: var(--stage-h);
+  height: var(--stage-w);
+  transform: rotate(-90deg);
+  transform-origin: top left;
+}
+.scream-line {
+  display: block;
+  white-space: nowrap;
+  /* The ramp: each chunk is bigger, heavier, and more condensed than the last. */
+  font-size: calc(var(--S) * var(--r));
+  font-weight: var(--w);
+  font-stretch: var(--x);
+}
+.scream-line:nth-child(1) {
+  --r: 0.26;
+  --w: 300;
+  --x: 125%;
+}
+.scream-line:nth-child(2) {
+  --r: 0.42;
+  --w: 500;
+  --x: 100%;
+}
+.scream-line:nth-child(3) {
+  --r: 0.68;
+  --w: 800;
+  --x: 75%;
+}
+.scream-line:nth-child(4) {
+  --r: 1;
+  --w: 900;
+  --x: 62%;
+  margin-top: auto; /* the gap above is where the last word stretches into */
+  padding-top: 0.04em;
+}
+.scream-word {
+  display: inline-block;
+  transform: scaleY(var(--sy, 1));
+  transform-origin: bottom left;
+}
+/* The brand dot stays round: it undoes the stretch. */
+.scream .dot {
+  vertical-align: 0;
+  transform: scaleY(calc(1 / var(--sy, 1)));
+  transform-origin: bottom;
+}
+
+.motion .scream {
+  height: 360vh;
+}
+.motion .scream-stage {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  height: calc(100svh - var(--header-h));
+  min-height: 0;
+}
+.motion .scream-stage:not(.is-full) {
+  background: var(--wall);
+  color: var(--ink);
+}
+/* Not yet shouted: an outline waiting to be filled. */
+.motion .scream-line {
+  transition:
+    transform 0.45s cubic-bezier(0.2, 1.4, 0.4, 1),
+    color 0.2s,
+    -webkit-text-stroke-color 0.2s;
+}
+.motion .scream-line:not(.is-lit) {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  transform: translateY(0.12em) scale(0.96);
+  transform-origin: left bottom;
+}
+.motion .scream-line:not(.is-lit) .dot {
+  opacity: 0;
 }
 
 .focus {
@@ -957,20 +1154,67 @@ a:hover {
 }
 
 /* ---------------------------------------------------------------- people */
-.people-group {
-  margin: var(--s6) 0 var(--s3);
-}
-.people-group:first-child {
-  margin-top: 0;
-}
+/* People: one grid for everyone, groups marked on their first card.
+   Nobody sits alone in a row: when the last row would hold one person, the last row takes one more instead.
+   Trick: c columns become c × (c + 1) tracks; a card spans c + 1, and in a too-short last row the last c + 1 cards span c. */
 .people-list {
+  --c: 4;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  grid-template-columns: repeat(20, minmax(0, 1fr)); /* c × (c + 1) */
   gap: var(--s5) var(--col-gap);
   margin: 0;
   padding: 0;
   list-style: none;
 }
+.person {
+  grid-column: span 5;
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+}
+.person.is-group-start {
+  border-top-color: var(--ink);
+}
+.people-list:has(> .person:last-child:nth-child(4n + 1)) > .person:nth-last-child(-n + 5) {
+  grid-column: span 4;
+}
+.person-group {
+  display: block;
+  height: 1.4em;
+  line-height: 1.4;
+  margin-bottom: var(--s2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+}
+@media (max-width: 1099px) {
+  .people-list {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .person {
+    grid-column: span 4;
+  }
+  .people-list:has(> .person:last-child:nth-child(4n + 1)) > .person:nth-last-child(-n + 5) {
+    grid-column: span 4;
+  }
+  .people-list:has(> .person:last-child:nth-child(3n + 1)) > .person:nth-last-child(-n + 4) {
+    grid-column: span 3;
+  }
+}
+@media (max-width: 719px) {
+  .people-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .person,
+  .people-list:has(> .person:last-child:nth-child(4n + 1)) > .person:nth-last-child(-n + 5),
+  .people-list:has(> .person:last-child:nth-child(3n + 1)) > .person:nth-last-child(-n + 4) {
+    grid-column: span 3;
+  }
+  .people-list:has(> .person:last-child:nth-child(2n + 1)) > .person:nth-last-child(-n + 3) {
+    grid-column: span 2;
+  }
+}
+
 .person-card {
   display: block;
   text-decoration: none;
@@ -1078,15 +1322,9 @@ a:hover {
   letter-spacing: var(--track);
   line-height: 1;
 }
-.join-cta:hover {
-  color: var(--accent);
-}
 .join-cta:hover .join-cta-sub {
-  background: var(--accent);
-  color: var(--ink);
-}
-.join-cta:hover .dot {
-  background: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 .section-join .section-body > p {
   margin-top: var(--s5);
@@ -1247,17 +1485,6 @@ a:hover {
   transform: none;
 }
 
-/* Manifesto finale lights up word by word as you scroll. */
-.scrub-word {
-  transition: color 0.35s;
-}
-.motion .scrub-word {
-  color: var(--line);
-}
-.motion .scrub-word.is-lit {
-  color: var(--ink);
-}
-
 /* Images regain color in the middle of the screen (helps touch devices, which have no hover). */
 .in-focus .media {
   filter: none;
@@ -1331,9 +1558,6 @@ a:hover {
   }
   .prototype:nth-child(even) .thumb {
     order: 0;
-  }
-  .people-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .profile-portrait,
   .profile-info {
