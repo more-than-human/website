@@ -1,7 +1,9 @@
 import "./style.css";
 import "./style-sink.css";
-import { allPeople, projects, updates, type Person } from "./content.ts";
-import { chip, projectTag, renderPerson, renderPrototype, renderUpdate } from "./render.ts";
+import { allPeople, people, projects, showcase, updates, type Person } from "./content.ts";
+import { initMotion } from "./motion.ts";
+import { chip, projectTag, renderPeople, renderPerson, renderPrototype, renderShowcase, renderUpdate } from "./render.ts";
+import { initShowcase } from "./showcase.ts";
 
 const fill = (name: string, html: string) => {
   document.querySelector(`[data-sink="${name}"]`)!.innerHTML = html;
@@ -27,13 +29,21 @@ fill(
     .map((p) => renderPrototype(p, true))
     .join(""),
 );
+const sun = allPeople.find((m) => m.id === "sun-chuanqi")!;
+const shuji = allPeople.find((m) => m.id === "shuji-hosokawa")!;
 fill(
   "people",
   [
-    allPeople.find((m) => m.id === "sun-chuanqi")!,
-    allPeople.find((m) => m.id === "shuji-hosokawa")!,
-    { id: "new-member", name: "New Member", role: "UROP · no photo yet" } satisfies Person,
-  ]
-    .map(renderPerson)
-    .join(""),
+    renderPerson(sun, "Group label"),
+    // Hover state, forced on so it can be reviewed without a pointer.
+    renderPerson(shuji).replace('class="person-card"', 'class="person-card sink-hover"'),
+    renderPerson({ ...shuji, id: "long-name", name: "Maximiliana Featherstonehaugh-Ishikawa", role: "UROP · MIT EECS & Comparative Media Studies" }),
+    renderPerson({ id: "new-member", name: "New Member", role: "UROP · no photo yet" } satisfies Person),
+    renderPerson({ ...sun, id: "fifth", name: "Fifth Card", role: "Fills the last row" }),
+  ].join(""),
 );
+fill("people-grid", renderPeople(people));
+
+fill("showcase", renderShowcase(showcase));
+initShowcase(document.querySelector<HTMLElement>("[data-showcase]")!);
+initMotion();

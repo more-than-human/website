@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Style sink · Tangible AI Working Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Libre+Caslon+Text:ital@0;1&display=swap"
+    />
   </head>
   <body>
     <main class="sink">
       <header class="sink-head">
         <p class="label">Dev only · not linked from the site</p>
         <h1>Style sink</h1>
-        <p>
+        <p class="serif">
           Every token and component from <code>src/style.css</code>, rendered with real content through the same
           renderers as the site (<code>src/render.ts</code>). Change the stylesheet here first, then check the full page.
         </p>
@@ -19,45 +25,52 @@
 
       <section class="sink-section">
         <h2 class="sink-title">Principles</h2>
-        <ol class="sink-rules">
-          <li>White on black. Lines are <code>--dim</code>, secondary text is <code>--mute</code>, everything else is <code>--fg</code>.</li>
+        <ol class="sink-rules serif">
+          <li>A gallery wall. Ink (<code>--ink</code>) on off-white (<code>--wall</code>), high contrast. Hairlines are <code>--line</code>, secondary text is <code>--grey</code>.</li>
           <li>
-            Orange (<code>--accent</code>) marks only what we most want you to do or notice: the Join call to action,
-            the cursor, and keyboard focus. Never decoration.
+            Vermilion (<code>--accent</code>) marks only the most important thing: the Join call to action, the brand dot,
+            keyboard focus, and the letter in your hand. Never decoration.
           </li>
-          <li>Emphasis without color: invert to white background with black text.</li>
-          <li>One typeface, monospace. Hierarchy comes from size, weight, and uppercase labels.</li>
+          <li>Color and motion are functional: they point at what matters most, and only one thing in view holds the accent. Hover confirms a target (underline, ink inversion); it never moves the vermilion or swaps colors for show.</li>
+          <li>Emphasis without color: invert (ink background, wall text), or go big and condensed.</li>
+          <li>Two typefaces. Archivo for titles and labels (condensed, uppercase for display), Libre Caslon for reading.</li>
+          <li>A 12-column grid: section labels on the left, content on the right. Generous space, asymmetric placement, numbered like a catalogue.</li>
           <li>Square corners, 1px rules, no shadows, no gradients.</li>
-          <li>Images are monochrome at rest. Portraits are 1-bit dithered. Color appears on hover or focus.</li>
+          <li>Images are monochrome at rest; color on hover, on focus, or while centered on screen. Portraits are the exception: colorful pop-art comics at rest, the real photo on hover.</li>
+          <li>Motion is a handle, not decoration: title letters steer under the pointer and can be dragged anywhere (tethered home by a puck-style dot chain), content reveals once on scroll, the manifesto screams as you scroll, the ticker follows your scroll. Ambient motion switches off with reduced motion.</li>
+          <li>Say it once. The header mark hides while the hero title is on screen.</li>
+          <li>Nobody stands alone: every row of people holds at least two.</li>
         </ol>
       </section>
 
       <section class="sink-section">
         <h2 class="sink-title">Color</h2>
         <ul class="sink-swatches">
-          <li><span style="background: var(--bg); border: 1px solid var(--dim)"></span>--bg #000</li>
-          <li><span style="background: var(--fg)"></span>--fg #f4f4f4</li>
-          <li><span style="background: var(--mute)"></span>--mute #8c8c8c · secondary text</li>
-          <li><span style="background: var(--dim)"></span>--dim #555 · rules only, never text</li>
-          <li><span style="background: var(--accent)"></span>--accent #ff5a1f · primary action, cursor, focus</li>
+          <li><span style="background: var(--wall); outline: 1px solid var(--line)"></span>--wall #f7f6f2 · page</li>
+          <li><span style="background: var(--ink)"></span>--ink #111 · text, key rules, the screen</li>
+          <li><span style="background: var(--grey)"></span>--grey #6b6862 · secondary text</li>
+          <li><span style="background: var(--line)"></span>--line #d9d6ce · hairlines only, never text</li>
+          <li><span style="background: var(--accent)"></span>--accent #ff3b1f · primary action, brand dot, focus</li>
         </ul>
       </section>
 
       <section class="sink-section">
         <h2 class="sink-title">Type</h2>
-        <p class="hero-title">Tangible AI<span class="cursor" aria-hidden="true"></span></p>
-        <p class="join-title">New players welcome</p>
+        <p class="hero-title">Tangible</p>
+        <p class="hero-tagline">Interacting with AI should feel like a breath of fresh air<span class="dot" aria-hidden="true"></span></p>
+        <p class="hero-sub">Hero sub: we design and build interactive systems.</p>
         <p class="focus-title">Focus title</p>
         <p class="lead">Lead: computation as human experience.</p>
-        <p>Body: we design and build interactive systems that make us more human, and more than human.</p>
+        <p class="serif">Serif body: we design and build interactive systems that make us more human, and more than human.</p>
+        <p>Sans body: used for interface text.</p>
         <p class="label">Label · uppercase · tracked</p>
         <p class="credit">Credit / meta text</p>
         <p><a href="#">Inline link</a> · <a class="arrow-link" href="#">Arrow link →</a></p>
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Section label</h2>
-        <h2 class="section-label sink-static"><span class="section-index">02</span>Updates</h2>
+        <h2 class="sink-title">Section label (roman numeral + name)</h2>
+        <h2 class="section-label sink-static"><span class="section-index">II</span>Updates</h2>
       </section>
 
       <section class="sink-section">
@@ -65,7 +78,6 @@
         <p class="actions">
           <a class="button button-primary" href="#">Join us</a>
           <a class="button" href="#">Latest updates</a>
-          <a class="button button-primary button-large" href="#">Read the UROP opening ↗</a>
         </p>
       </section>
 
@@ -80,11 +92,18 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Manifesto, values, focus</h2>
+        <h2 class="sink-title">Manifesto, focus, values</h2>
         <ul class="manifesto">
           <li>Why can't we grasp an agent and steer it in real time?</li>
           <li class="manifesto-final"><strong>We are the interaction maximalists.</strong></li>
         </ul>
+        <div class="focus">
+          <div class="focus-head">
+            <h3 class="label">Current focus</h3>
+            <p class="focus-title">Hold That Thought</p>
+          </div>
+          <div class="focus-body"><p>We give handles to ideas: controls bound to the meaning of what a model generates.</p></div>
+        </div>
         <dl class="values">
           <div>
             <dt>Ownership &gt; instruction</dt>
@@ -102,11 +121,36 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Window frame</h2>
-        <figure class="window">
-          <figcaption class="window-bar"><span>puck++ / still</span><span>design: Avril Cui</span></figcaption>
-          <img class="media" src="/assets/pucks/puck-plus-plus-thumb.webp" alt="" />
-        </figure>
+        <h2 class="sink-title">Title: letters widen near the pointer and can be dragged anywhere in the box (drop near home to snap back, double-click to send home). Idle wave without a pointer.</h2>
+        <div class="hero sink-hero">
+          <p class="hero-title" data-steer>Tangible AI</p>
+          <p class="hero-hint"><span>Working Group · MIT Media Lab</span><span class="hero-hint-drag" aria-hidden="true">Grab a letter. Drag it anywhere ↗</span><button class="hero-reset" type="button" data-title-reset hidden>Put the letters back</button></p>
+        </div>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Showcase: "Now showing" window + playlist (content/showcase.json). Auto-advances until you interact.</h2>
+        <div data-sink="showcase"></div>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">Ticker (drifts; follows scroll direction and speeds up with scroll)</h2>
+        <div class="ticker" aria-hidden="true">
+          <div class="ticker-track"><span>Grasp it</span><span>Steer it</span><span>Turn the knob</span><span>Point at it</span></div>
+        </div>
+      </section>
+
+      <section class="sink-section">
+        <h2 class="sink-title">The scream: scroll through it. Four chunks land in turn, each bigger, heavier, more condensed; the last floods the screen in ink and stretches to fill it.</h2>
+        <div class="scream" data-scream>
+          <p class="scream-stage">
+            <span class="scream-block">
+            <span class="scream-line" style="--k: 0">We</span>
+            <span class="scream-line" style="--k: 1">are</span>
+            <span class="scream-line" style="--k: 2">interaction</span>
+            <span class="scream-line" style="--k: 3"><span class="scream-word">maximalists<span class="dot" aria-hidden="true"></span></span></span></span>
+          </p>
+        </div>
       </section>
 
       <section class="sink-section">
@@ -115,13 +159,22 @@
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Prototype cards</h2>
+        <h2 class="sink-title">Prototype plates (odd and even alternate sides; images wipe open on scroll)</h2>
         <ul class="prototype-list" data-sink="prototypes"></ul>
       </section>
 
       <section class="sink-section">
-        <h2 class="sink-title">Person cards: linked, unlinked, initials fallback</h2>
+        <h2 class="sink-title">People grid (real content): one grid, group label on the first card of each group. A row never holds one person; resize to see 4 → 3 → 2 columns.</h2>
+        <div data-sink="people-grid"></div>
+        <h2 class="sink-title sink-gap">Person card states: colorful comic at rest, photo forced on (hover state), long name, initials fallback. The photo opens as a circle from the pointer. Five cards, so the last row takes the spare.</h2>
         <ul class="people-list" data-sink="people"></ul>
+      </section>
+
+      <section class="sink-section section-join">
+        <h2 class="sink-title">Join call to action</h2>
+        <div class="section-body">
+          <a class="join-cta" href="#">New players welcome<span class="dot" aria-hidden="true"></span><br /><span class="join-cta-sub">Read the UROP opening ↗</span></a>
+        </div>
       </section>
     </main>
     <script type="module" src="/src/style-sink.ts"></script>

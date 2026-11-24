@@ -1,0 +1,41 @@
+[
+  {
+    "id": "spaceship-ide",
+    "title": "Spaceship IDE",
+    "subtitle": "steer your ideas in real time",
+    "date": "2026-11-16",
+    "credit": "Sun Chuanqi",
+    "kind": "live",
+    "src": "https://chuanqisun.github.io/spaceship/",
+    "poster": "/assets/spaceship-ide.webp",
+    "posterAlt": "A story being generated line by line, with highlighted phrases and a dial below steering its tension from relaxed to strained",
+    "launchLabel": "Launch the live simulator",
+    "links": [
+      { "href": "https://www.youtube.com/watch?v=3WmNLWUmcnY", "label": "Video" },
+      { "href": "https://chuanqisun.github.io/spaceship/", "label": "Open" }
+    ]
+  },
+  {
+    "id": "puck-plus-plus",
+    "title": "Puck++",
+    "subtitle": "steering with knobs",
+    "date": "2026-09",
+    "credit": "Avril Cui",
+    "kind": "embed",
+    "src": "/assets/pucks/context-pucks-v2-animation.html",
+    "poster": "/assets/pucks/puck-plus-plus-thumb.webp",
+    "posterAlt": "A puck with five knobs, each labeled with a concept",
+    "links": [{ "href": "/assets/pucks/context-pucks-v2-interactive.html", "label": "Try it" }]
+  },
+  {
+    "id": "magnetic-puck",
+    "title": "Magnetic puck",
+    "subtitle": "knobs that click into place",
+    "date": "2026",
+    "credit": "Shuji Hosokawa",
+    "kind": "video",
+    "src": "/assets/pucks/magnetic-puck-viz.mp4",
+    "poster": "/assets/pucks/magnetic-puck-viz-poster.webp",
+    "posterAlt": "A hand turning one of three white pucks on a glowing table, with a graph of linked ideas on a laptop behind"
+  }
+]

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>05 · Riso Zine — Tangible AI Working Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f4f0e8;
+    --pink: #ff48b0;
+    --blue: #0078bf;
+    --yellow: #ffe800;
+    --ink: #1a1a2e;
+    --display: "Syne", sans-serif;
+    --mono: "Space Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--mono); font-size: 15px; line-height: 1.55; overflow-x: hidden; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* overprint: two inks multiplied */
+  .over { position: relative; display: inline-block; }
+  .over .b, .over .p { mix-blend-mode: multiply; }
+  .over .p { position: absolute; left: .045em; top: .035em; color: var(--pink); }
+  .over .b { color: var(--blue); }
+
+  /* halftone image: grayscale photo multiplied over an ink block, with a dot screen */
+  .ht { position: relative; background: var(--blue); overflow: hidden; }
+  .ht.pink { background: var(--pink); }
+  .ht img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.4) brightness(1.15); mix-blend-mode: screen; }
+  .ht::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--paper) 28%, transparent 30%); background-size: 5px 5px; mix-blend-mode: soft-light; opacity: .7; pointer-events: none; }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 3px solid var(--ink); }
+  header b { font-family: var(--display); font-weight: 800; font-size: 20px; }
+  header nav a { margin-left: 18px; text-decoration: none; }
+  header nav a:hover { background: var(--yellow); }
+
+  .cover { position: relative; padding: 48px 0 80px; min-height: 86vh; }
+  .cover h1 { font-family: var(--display); font-weight: 800; font-size: clamp(48px, 9.4vw, 150px); line-height: .82; letter-spacing: -.04em; margin: 0; text-transform: uppercase; position: relative; z-index: 2; }
+  .cover .issue { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 18px; }
+  .cover .photo { position: absolute; right: 0; top: 160px; width: 44%; aspect-ratio: 4/5; transform: rotate(4deg); z-index: 1; }
+  .cover .sticker { position: absolute; z-index: 3; left: 52%; top: 64%; width: 170px; height: 170px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; text-align: center; font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1; transform: rotate(-14deg); }
+  .cover .tag { position: relative; z-index: 2; max-width: 22ch; font-size: 22px; margin-top: 36px; background: var(--paper); padding: 6px 10px; display: inline-block; line-height: 1.35; }
+
+  .strip { background: var(--pink); color: var(--paper); font-family: var(--display); font-weight: 800; font-size: 28px; white-space: nowrap; overflow: hidden; padding: 10px 0; transform: rotate(-1.5deg); margin: 0 -20px; }
+  .strip span { display: inline-block; padding-right: 40px; }
+
+  section { padding: 96px 0; }
+  .sec-h { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
+  .sec-h .n { font-family: var(--display); font-weight: 800; font-size: 20px; background: var(--ink); color: var(--paper); padding: 2px 10px; }
+  h2 { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 7vw, 104px); line-height: .9; letter-spacing: -.03em; margin: 0; text-transform: uppercase; }
+
+  .vision { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; }
+  .vision .q { font-family: var(--display); font-weight: 700; font-size: 36px; line-height: 1.05; }
+  .vision .q mark { background: var(--yellow); padding: 0 4px; }
+  .list p { border-top: 2px dashed var(--ink); padding-top: 12px; margin: 0 0 18px; }
+  .list p:first-child { border-top: 3px solid var(--ink); }
+  .max { grid-column: 1 / -1; font-size: clamp(40px, 6vw, 92px); font-family: var(--display); font-weight: 800; line-height: .9; text-transform: uppercase; letter-spacing: -.03em; }
+  .focus { grid-column: 1 / -1; border: 3px solid var(--ink); padding: 28px; position: relative; background: var(--paper); box-shadow: 10px 10px 0 var(--blue); }
+  .focus h3 { font-family: var(--display); font-size: 32px; margin: 0 0 8px; }
+
+  .zine { display: grid; grid-template-columns: repeat(6, 1fr); gap: 28px; }
+  .clip { position: relative; }
+  .clip .ht { aspect-ratio: 1; }
+  .clip h3 { font-family: var(--display); font-weight: 800; font-size: 30px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: -.02em; }
+  .clip p { margin: 0; }
+  .clip .who { position: absolute; top: -12px; right: -8px; background: var(--yellow); padding: 2px 8px; font-size: 12px; transform: rotate(3deg); z-index: 2; }
+  .clip:hover .ht img { filter: none; mix-blend-mode: normal; }
+  .k1 { grid-column: 1 / 4; transform: rotate(-1.5deg); }
+  .k2 { grid-column: 4 / 7; margin-top: 80px; transform: rotate(1.2deg); }
+  .k3 { grid-column: 2 / 5; transform: rotate(.8deg); }
+  .k4 { grid-column: 4 / 7; margin-top: -60px; transform: rotate(-2deg); }
+  .k3 .ht, .k2 .ht { background: var(--pink); }
+
+  .crew { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .mate .ht { aspect-ratio: 1; border-radius: 50%; }
+  .mate:nth-child(3n+2) .ht { background: var(--pink); }
+  .mate b { display: block; font-family: var(--display); font-size: 18px; margin-top: 10px; }
+  .mate span { font-size: 12px; }
+  .mate:hover .ht img { filter: none; mix-blend-mode: normal; }
+
+  .join { background: var(--blue); color: var(--paper); margin: 0 -24px; padding: 110px 24px; text-align: center; position: relative; }
+  .join h2 { color: var(--yellow); }
+  .join p { max-width: 42ch; margin: 24px auto 0; font-size: 17px; }
+  .join a { display: inline-block; margin-top: 36px; background: var(--yellow); color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; text-decoration: none; padding: 18px 32px; border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--pink); transform: rotate(-2deg); }
+  .join a:hover { transform: rotate(0); box-shadow: 4px 4px 0 var(--pink); }
+  footer { display: flex; justify-content: space-between; font-size: 12px; padding: 18px 0 32px; }
+
+  @media (max-width: 820px) {
+    .cover .photo { position: relative; top: 0; width: 80%; margin: 24px 0 0 auto; }
+    .cover .sticker { left: 4%; top: auto; bottom: 40px; width: 120px; height: 120px; font-size: 15px; }
+    .vision { grid-template-columns: 1fr; }
+    .zine > * { grid-column: 1 / -1 !important; margin-top: 0 !important; }
+    .crew { grid-template-columns: repeat(2, 1fr); }
+    header nav a:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <b>TAI/WG</b>
+    <nav><a href="#vision">vision</a><a href="#projects">projects</a><a href="#members">members</a><a href="#join" style="background:var(--yellow);padding:2px 6px">join!</a></nav>
+  </header>
+
+  <div class="cover">
+    <div class="issue"><span>ISSUE 01 · FALL 2026</span><span>MIT MEDIA LAB / <a href="https://tangible.media.mit.edu/">TANGIBLE MEDIA GROUP</a></span></div>
+    <h1><span class="over"><span class="b">Tangible</span><span class="p" aria-hidden="true">Tangible</span></span><br /><span class="over"><span class="b">AI</span><span class="p" aria-hidden="true">AI</span></span><br /><span class="over"><span class="b">Working</span><span class="p" aria-hidden="true">Working</span></span><br /><span class="over"><span class="b">Group</span><span class="p" aria-hidden="true">Group</span></span></h1>
+    <div class="photo ht pink"><img src="../../public/assets/pucks/magnetic-puck-viz-poster.webp" alt="A hand turning a white puck on a glowing table" /></div>
+    <div class="sticker">no<br />submit<br />button</div>
+    <p class="tag">Interacting with AI should feel like a breath of fresh air.</p>
+  </div>
+</div>
+
+<div class="strip" aria-hidden="true"><span>GRASP IT ✺ STEER IT ✺ TURN THE KNOB ✺ POINT AT IT ✺ GRASP IT ✺ STEER IT ✺ TURN THE KNOB ✺ POINT AT IT ✺</span></div>
+
+<div class="wrap">
+  <section id="vision">
+    <div class="sec-h"><span class="n">01</span><h2>Manifesto</h2></div>
+    <div class="vision">
+      <p class="q">Why can't we <mark>grasp</mark> an agent and steer it in real time?</p>
+      <div class="list">
+        <p>We are tired of screens, chat bots, and endless prompting.</p>
+        <p>We are working to increase the speed and bandwidth of human–machine interaction by 100× — without brain–computer interfaces.</p>
+        <p>We want to help people achieve more by thinking more, intending more, acting more, and aspiring more.</p>
+        <p>Part of the Tangible Media Group, led by Prof. Hiroshi Ishii, bridging digital and physical worlds for 30+ years.</p>
+      </div>
+      <div class="focus">
+        <h3>Now: Hold That Thought</h3>
+        <p style="margin:0">Handles for ideas. A slider bound to “more poetic.” One puck per idea in a brainstorm. The output changes as you move them.</p>
+      </div>
+      <div class="max"><span class="over"><span class="b">We are the interaction maximalists.</span><span class="p" aria-hidden="true">We are the interaction maximalists.</span></span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-h"><span class="n">02</span><h2>Projects</h2></div>
+    <div class="zine">
+      <article class="clip k1"><span class="who">by Sun</span><div class="ht"><img src="../../public/assets/papershop/sketch-01.webp" alt="Storyboard of drawing a mug on paper and placing it on screen" /></div><h3>Papershop</h3><p>Draw on paper, point, and speak. The desk is the editor.</p></article>
+      <article class="clip k2"><span class="who">by Avril</span><div class="ht"><img src="../../public/assets/pucks/puck-plus-plus-thumb.webp" alt="A puck with five labeled knobs" /></div><h3>Puck++</h3><p>One puck per idea. Pull, push, flip, turn.</p></article>
+      <article class="clip k3"><span class="who">by Connie</span><div class="ht"><img src="../../public/assets/now-then-now/map.webp" alt="Map of colored dots, one per person" /></div><h3>Now Then Now</h3><p>All our complex lives all at once.</p></article>
+      <article class="clip k4"><span class="who">by Sun</span><div class="ht"><img src="../../public/assets/spaceship-ide.webp" alt="Story generated line by line with a tension dial" /></div><h3>Spaceship IDE</h3><p>LLMs at 60 frames per second.</p></article>
+    </div>
+  </section>
+
+  <section id="members">
+    <div class="sec-h"><span class="n">03</span><h2>The crew</h2></div>
+    <div class="crew">
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/hiroshi-ishii.webp" alt="" /></div><b>Hiroshi Ishii</b><span>advisor</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/chuanqi-sun.webp" alt="" /></div><b>Sun Chuanqi</b><span>research lead</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/quincy-kuang.webp" alt="" /></div><b>Quincy Kuang</b><span>research lead</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/lucy-li.webp" alt="" /></div><b>Lucy Li</b><span>research lead</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/avril-cui.webp" alt="" /></div><b>Avril Cui</b><span>UROP</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/shuji-hosokawa.webp" alt="" /></div><b>Shuji Hosokawa</b><span>UROP</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/connie-huang.webp" alt="" /></div><b>Connie Huang</b><span>UROP</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/fyona-shi.webp" alt="" /></div><b>Fyona Shi</b><span>UROP</span></div>
+      <div class="mate"><div class="ht"><img src="../../public/assets/people/sophia-loiselle.webp" alt="" /></div><b>Sophia Loiselle</b><span>UROP</span></div>
+    </div>
+  </section>
+
+  <section id="join" class="join">
+    <h2>New players<br />welcome</h2>
+    <p>Recruiting UROPs for IAP + Spring 2027. Bring something you can contribute and an appetite for learning the rest. 8+ hours a week.</p>
+    <a href="https://code.chuanqisun.com/tmg-urop/">Read the opening →</a>
+  </section>
+  <footer><span>Printed on the internet, 2026</span><span>Tangible AI Working Group · MIT Media Lab</span></footer>
+</div>
+</body>
+</html>

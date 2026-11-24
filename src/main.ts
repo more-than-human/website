@@ -1,8 +1,9 @@
 import "./style.css";
 import { BASE } from "./base.ts";
-import { filterableProjects, people, personById, projectBySlug, projects, updateCount, updates } from "./content.ts";
-import { escapeHtml as esc } from "./markdown.ts";
-import { chip, renderNotFound, renderPerson, renderProfile, renderPrototype, renderUpdate } from "./render.ts";
+import { filterableProjects, people, personById, projectBySlug, projects, showcase, updateCount, updates } from "./content.ts";
+import { initMotion } from "./motion.ts";
+import { chip, renderNotFound, renderPeople, renderProfile, renderPrototype, renderShowcase, renderUpdate } from "./render.ts";
+import { initShowcase } from "./showcase.ts";
 
 const SITE_TITLE = document.title;
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
@@ -13,6 +14,9 @@ const pageView = $("#page");
 /* ---------------------------------------------------------------- home sections */
 
 function renderHome(): void {
+  slot("showcase").innerHTML = renderShowcase(showcase);
+  initShowcase($("[data-showcase]"));
+
   const chips = [chip("", "All", updates.length), ...filterableProjects.map((p) => chip(p.slug, p.label, updateCount(p.slug)))]
     .map((c) => `<li>${c}</li>`)
     .join("");
@@ -26,12 +30,7 @@ function renderHome(): void {
     .map((p) => renderPrototype(p, filterableProjects.includes(p)))
     .join("")}</ul>`;
 
-  slot("people").innerHTML = people
-    .map(
-      (g) =>
-        `<h3 class="label people-group">${esc(g.group)}</h3><ul class="people-list">${g.members.map(renderPerson).join("")}</ul>`,
-    )
-    .join("");
+  slot("people").innerHTML = renderPeople(people);
 }
 
 function applyFilter(): void {
@@ -95,7 +94,6 @@ function route({ scroll = true } = {}): void {
     heading?.focus({ preventScroll: true });
   }
   syncActiveSection();
-  updateStatusLine();
 }
 
 /** Brief "selected" blink on the section the reader just jumped to. */
@@ -137,7 +135,7 @@ document.addEventListener("click", (e) => {
 
 window.addEventListener("popstate", () => route());
 
-/* ---------------------------------------------------------------- nav: active section, number keys, status line */
+/* ---------------------------------------------------------------- nav: active section, number keys */
 
 const navLinks = [...document.querySelectorAll<HTMLAnchorElement>(".site-nav a")];
 const sectionIds = navLinks.map((a) => a.hash.slice(1));
@@ -157,7 +155,6 @@ function syncActiveSection(): void {
     if (a.hash === `#${id}`) a.setAttribute("aria-current", "location");
     else a.removeAttribute("aria-current");
   }
-  updateStatusLine();
 }
 
 let scrollQueued = false;
@@ -185,15 +182,8 @@ document.addEventListener("keydown", (e) => {
   route();
 });
 
-function updateStatusLine(): void {
-  const path =
-    currentView === "home"
-      ? `~/${activeSection && activeSection !== "top" ? activeSection : ""}`
-      : `~/${location.pathname.slice(BASE.length).replace(/\/$/, "")}`;
-  $("[data-status-path]").textContent = path;
-}
-
 /* ---------------------------------------------------------------- boot */
 
 renderHome();
 route();
+initMotion();

@@ -1,5 +1,6 @@
 import peopleData from "../content/people.json";
 import projectsData from "../content/projects.json";
+import showcaseData from "../content/showcase.json";
 import { withBase } from "./base.ts";
 import { parseFrontMatter, renderMarkdown } from "./markdown.ts";
 
@@ -47,6 +48,30 @@ export interface Update {
   credit?: string;
   html: string;
 }
+
+/** A demo featured in the front-page "Now showing" window. */
+export interface ShowcaseItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  credit: string;
+  /** live: poster + launch button that loads `src` on click · embed: iframe that runs on its own · video: muted loop */
+  kind: "live" | "embed" | "video";
+  src: string;
+  poster: string;
+  posterAlt: string;
+  launchLabel?: string;
+  links?: { href: string; label: string }[];
+}
+
+/** Newest first, as listed in content/showcase.json. */
+export const showcase: ShowcaseItem[] = (showcaseData as ShowcaseItem[]).map((s) => ({
+  ...s,
+  src: withBase(s.src),
+  poster: withBase(s.poster),
+  links: s.links?.map((l) => ({ ...l, href: withBase(l.href) })),
+}));
 
 export const people: PeopleGroup[] = (peopleData as PeopleGroup[]).map((g) => ({
   group: g.group,
